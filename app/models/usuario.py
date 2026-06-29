@@ -1,6 +1,6 @@
 from app import db
 from datetime import datetime
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class Usuario(db.Model):
@@ -17,3 +17,15 @@ class Usuario(db.Model):
     def set_password(self, password_plano):
         """Hashea la contraseña en texto plano"""
         self.password = generate_password_hash(password_plano)
+
+    def check_password(self, passwd):
+        """ Compara el texto plano con la contraseña hash """
+        return check_password_hash(passwd)
+
+    def es_admin(self):
+        return self.rol == "admin"
+
+    def __repr__(self):
+        return f'<Usuario: {self.email} | {self.rol} >'
+
+    
