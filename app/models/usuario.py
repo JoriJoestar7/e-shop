@@ -16,7 +16,6 @@ class Usuario(db.Model):
 
 
     # Relacion: un usuario tiene muchos pedidos
-
     pedidos = db.relationship('Pedido', backref='cliente', lazy=True)
 
     def set_password(self, password_plano):
